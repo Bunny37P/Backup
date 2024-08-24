@@ -2,7 +2,7 @@
 # ASSIGNMENT 1
 ## AUTOMATED BACKUP FILE
 
-Working Procedure:
+### Working Procedure: 
 File Selection: Identifies files with vowels (a, e, i, o, u   small or capital) in their names within the source directory.
 Incremental Backup: Copies only files that have been modified (or) newly added since the last backup.
 Logging: Logs the process ID (PID), runtime, and the number of files updated to the specified log file.
