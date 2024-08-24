@@ -1,4 +1,3 @@
-# Backup
 # ASSIGNMENT 1
 ## AUTOMATED BACKUP FILE
 
