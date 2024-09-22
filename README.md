@@ -1,27 +1,43 @@
-# ASSIGNMENT 1
-## AUTOMATED BACKUP FILE
+# Assignment_2 - Producer-Consumer Problem
 
-### Working Procedure: 
-File Selection: Identifies files with vowels (a, e, i, o, u   small or capital) in their names within the source directory.
-Incremental Backup: Copies only files that have been modified (or) newly added since the last backup.
-Logging: Logs the process ID (PID), runtime, and the number of files updated to the specified log file.
+## Overview
 
-### Command to run the Script:
-`./backup_script.sh -s <source_directory> -d <destination_directory> [-o <output_file>]`
+This assignment involves implementing inter-process communication (IPC) using the Producer-Consumer model. The program forks multiple processes to handle the production and consumption of random lowercase alphabetic characters. Producers generate these characters, while consumers count the number of vowels read.
 
--s <source_directory>: Directory from which files will be backed up.
--d <destination_directory>: Directory where the backup will be stored.
--o <output_file>: (Optional) Log file for storing backup statistics. Default is output.csv.
+## Functional Requirements
 
-### CRONJOB
-To edit CRONJOB file run this command: 
-`crontab -e` 
- 
-To add the Cron Job to the crontab file to schedule your backup_script.sh: 
+1. The main program forks into Producer and Consumer processes.
+2. The Producer generates random lowercase alphabetic characters.
+3. The Consumer counts the vowels read from the stream.
+4. Each Producer writes produced characters to a file `prod_<thread_number>.txt` (one character per line) every minute.
+5. Each Consumer writes the cumulative vowel count to a file `cons_<thread_number>.txt` every minute.
+6. Synchronization is maintained to avoid loss of characters.
+7. The program is implemented in C using IPC constructs such as pipes.
 
-`0 0 * * * /path/to/backup_script.sh -s /path/to/source -d /path/to/destination -o /path/to/logfile.csv` 
+## Sub-Problems
 
-We have to replace /path/to/backup_script.sh, /path/to/source, /path/to/destination, and /path/to/logfile.csv with the actual paths on system.
+### Sub-Problem 1: Single Producer, Single Consumer
 
-To verify whether the CRONJOB is added or not run the command: 
-`crontab -l`
+- **File**: `q_1.c`
+- **Description**: Implements one producer that generates characters and one consumer that counts vowels.
+- **Execution**: To run this program, compile it with `make q_1` and execute `./q_1`.
+
+### Sub-Problem 2: Single Producer, Multiple Consumers
+
+- **File**: `q_2.c`
+- **Description**: Implements one producer that generates characters and five consumers that count vowels.
+- **Execution**: To run this program, compile it with `make q_2` and execute `./q_2`.
+
+### Sub-Problem 3: Multiple Producers, Multiple Consumers
+
+- **File**: `q_3.c`
+- **Description**: Implements five producers that generate characters and five consumers that count vowels.
+- **Execution**: To run this program, compile it with `make q_3` and execute `./q_3`.
+
+## Compilation and Execution
+
+### Makefile Commands
+
+- **Compile all sub-problems**:
+  ```bash
+  make all
